@@ -13,7 +13,7 @@ jobs:
     - id: initial_value
       run: |
         echo "initial_value='[\"dev\"]'" >> $GITHUB_OUTPUT
-    - uses: @actions/checkout@3.3.0
+    - uses: actions/checkout@v3
     - uses: ./.github/workflows/recursive-action.yml
       with:
         values: ${{ steps.initial_value.outputs.initial_value }}
