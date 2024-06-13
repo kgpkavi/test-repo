@@ -8,7 +8,4 @@ on:
 
 jobs:
   call-recursive-action:
-    uses: /.github/workflows/recursive-action
-    
-  
-    
+    uses: ./.github/workflows/recursive-action.yml
