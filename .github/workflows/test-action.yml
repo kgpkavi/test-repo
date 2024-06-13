@@ -8,6 +8,11 @@ on:
 
 jobs:
   call-recursive-action:
-    uses: ./.github/workflows/recursive-action.yml
-    with:
-      values: "${{ fromJson(\"[\"dev\"]\") }}"
+    runs-on: ubuntu-latest
+    steps:
+    - id: initial_value
+      run: |
+        echo "initial_value='[\"dev\"]'" >> $GITHUB_OUTPUT
+    - uses: ./.github/workflows/recursive-action.yml
+      with:
+        values: ${{ steps.initial_value.outputs.initial_value }}
