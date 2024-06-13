@@ -1,0 +1,14 @@
+name: test-action
+
+on:
+  push:
+    branches: 
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  call-recursive-action:
+    uses: /.github/workflows/recursive-action
+    
+  
+    
