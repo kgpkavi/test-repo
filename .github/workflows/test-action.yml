@@ -9,3 +9,5 @@ on:
 jobs:
   call-recursive-action:
     uses: ./.github/workflows/recursive-action.yml
+    with:
+      values: "${{ ['dev'] }}"
