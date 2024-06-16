@@ -16,3 +16,25 @@ jobs:
           run: |
             echo "Dummy Run"
             echo "${{ inputs.env }}"
+
+  get_dependency:
+    needs: [dummy]
+    runs-on : ubuntu-latest
+    outputs:
+      dependency : ${{ steps.set-dependency.outputs.dependency }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - id: set-dependency
+        run: |
+          echo "dependency<<EOF" >> $GITHUB_OUTPUT
+          echo "$(cat ./environments/dependency.json)" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+  deploy_dependencies:
+    name: Deploy Dependencies
+    needs: [get_dependency]
+    if: (${{ fromJson(needs.get_dependency.outputs.dependency)[matrix.envname] }} && ${{ fromJson(needs.get_dependency.outputs.dependency)[matrix.envname] }} != [])
+    uses: ./.github/workflows/recursive-action.yml
+    with:
+      values: "${{ fromJson(needs.get_dependency.outputs.dependency)[matrix.envname] }}"
