@@ -25,18 +25,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ get_dependency ]
     strategy:
-      matrix: ${{ fromJson(inputs.values) }}
+      matrix:
+        envname: ${{ fromJson(inputs.values) }}
       fail-fast: true
 
     steps:
       - uses: ./github/workflow/dummy-action.yml
         with:
-          env: ${{ matrix }}
+          env: ${{ matrix.envname }}
   
-      - if: (${{ fromJson(needs.get_dependency.outputs.dependency)[matrix] }} && ${{ fromJson(needs.get_dependency.outputs.dependency)[matrix] }} != [])
+      - if: (${{ fromJson(needs.get_dependency.outputs.dependency)[matrix.envname] }} && ${{ fromJson(needs.get_dependency.outputs.dependency)[matrix.envname] }} != [])
         uses: ./.github/workflows/recursive-action.yml
         with:
-          values: "${{ fromJson(needs.get_dependency.outputs.dependency)[matrix] }}"
+          values: "${{ fromJson(needs.get_dependency.outputs.dependency)[matrix.envname] }}"
 
   
     
