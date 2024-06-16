@@ -1,0 +1,18 @@
+name: Dummy Action
+on:
+  workflow_call:
+    inputs:
+      env:
+        description: 'Env'
+        type: string
+        required: true
+jobs:
+  dummy:
+    name: Dummy
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
+    steps:
+        - name: Dummy Step
+          run: |
+            echo "Dummy Run"
+            echo "${{ inputs.env }}"
