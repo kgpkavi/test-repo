@@ -12,6 +12,8 @@ jobs:
     outputs:
       dependency : ${{ steps.set-dependency.outputs.dependency }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - id: set-dependency
         run: |
           echo "dependency<<EOF" >> $GITHUB_OUTPUT
