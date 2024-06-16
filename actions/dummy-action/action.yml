@@ -6,12 +6,12 @@ inputs:
     type: string
     required: true
 runs:
-  dummy:
-    name: Dummy
-    runs-on: ubuntu-latest
-    environment: ${{ inputs.env }}
-    steps:
-        - name: Dummy Step
-          run: |
-            echo "Dummy Run"
-            echo "${{ inputs.env }}"
+  using: composite
+  name: Dummy
+  runs-on: ubuntu-latest
+  environment: ${{ inputs.env }}
+  steps:
+      - name: Dummy Step
+        run: |
+          echo "Dummy Run"
+          echo "${{ inputs.env }}"
