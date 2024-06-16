@@ -19,4 +19,4 @@ jobs:
     needs: [init]
     uses: ./.github/workflows/recursive-action.yml
     with:
-      values: ${{ toJson(needs.init.outputs.initial_value) }}
+      values: ${{ toJson(["dev"]) }}
