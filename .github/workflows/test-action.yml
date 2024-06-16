@@ -10,11 +10,11 @@ jobs:
   init:
     runs-on: ubuntu-latest
     outputs:
-      initial_value: ${{ steps.initial_value.outputs.initial_value }}
+      initial_value: "${{ steps.initial_value.outputs.initial_value }}"
     steps:
     - id: initial_value
       run: |
-        echo 'initial_value=["dev"]' >> $GITHUB_OUTPUT
+        echo 'initial_value=[\"dev\"]' >> $GITHUB_OUTPUT
   call-recursive-action:
     needs: [init]
     uses: ./.github/workflows/recursive-action.yml
