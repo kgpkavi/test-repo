@@ -1,10 +1,11 @@
 name: test-action
 
 on:
-  push:
-    branches: 
-      - 'main'
   workflow_dispatch:
+    inputs:
+      values:
+        required: true
+        default: '["dev"]'
   
 jobs:
   init:
@@ -19,4 +20,4 @@ jobs:
     needs: [init]
     uses: ./.github/workflows/recursive-action.yml
     with:
-      values: ${{ needs.init.outputs.initial_value }}
+      values: ${{ inputs.values }}
