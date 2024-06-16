@@ -1,12 +1,11 @@
 name: Dummy Action
-on:
-  workflow_call:
-    inputs:
-      env:
-        description: 'Env'
-        type: string
-        required: true
-jobs:
+
+inputs:
+  env:
+    description: 'Env'
+    type: string
+    required: true
+runs:
   dummy:
     name: Dummy
     runs-on: ubuntu-latest
